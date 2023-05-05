@@ -1,6 +1,6 @@
 import Authentication.Authentication;
+import java.util.HashMap;
 
 public class TOFFEE {
-    Authentication authentication = new Authentication();
-    Catalog catalog = new Catalog();
+
 }

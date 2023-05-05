@@ -1,6 +1,4 @@
-package Order;
-
-
+package Buying;
 public class Order {
     
 }
