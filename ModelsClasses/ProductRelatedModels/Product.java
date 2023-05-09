@@ -1,23 +1,28 @@
-import Buying.order;
+package ModelsClasses.ProductRelatedModels;
+
+import java.util.ArrayList;
+
+import ModelsClasses.Buying.Order;
+
 public class Product {
     private Double price;
     private int quantity;
     private String name;
     private category category;
     private String description;
-    private Image image;
+    // private Image image;
     private String brand;
     private double discountPercentage;
     private Type type;
-    private Order[] sales;
+    private ArrayList<Order> sales;
 
-    public Product(Double price, int quantity, String name, category category, String description, Image image, String brand, double discountPercentage, Type type, Order[] sales) {
+    public Product(Double price, int quantity, String name, category category, String description, String brand, double discountPercentage, Type type, ArrayList<Order> sales) {
         this.price = price;
         this.quantity = quantity;
         this.name = name;
         this.category = category;
         this.description = description;
-        this.image = image;
+        // this.image = image;
         this.brand = brand;
         this.discountPercentage = discountPercentage;
         this.type = type;
@@ -31,6 +36,10 @@ public class Product {
     public void setQuantity(int quantity) {this.quantity = quantity;}
 
     public void setName(String name) {this.name = name;}
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public void setCategory(category category) {this.category = category;}
 
@@ -46,7 +55,7 @@ public class Product {
 
     public String getDescription() {return description;}
 
-    public Image getImage() {return image;}
+    // public Image getImage() {return image;}
 
     public String getBrand() {return brand;}
 
@@ -54,7 +63,7 @@ public class Product {
 
     public Type getType() {return type;}
 
-    public Order[] getSales() {return sales;}
+    public ArrayList<Order> getSales() {return sales;}
 
 
 }

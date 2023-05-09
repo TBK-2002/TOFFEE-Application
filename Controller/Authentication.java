@@ -1,5 +1,7 @@
-package Authentication;
+package Controller;
 import java.util.HashMap;
+
+import ModelsClasses.Account;
 
 public class Authentication {
     private HashMap<Integer, Account> accounts;
@@ -52,5 +54,14 @@ public class Authentication {
             return false;
         }
     }
-
+    public void loadAccounts() {
+        // load accounts from database
+        // mock data
+        Account a1 = new Account(1, "nour@gmail.com", "1234", "Cairo");
+        Account a2 = new Account(2, "ahmed@gmail.com", "1234", "Cairo");
+        Account a3 = new Account(3, "mohanad@gmail.com", "1234", "Cairo");
+        this.accounts.put(1, a1);
+        this.accounts.put(2, a2);
+        this.accounts.put(3, a3);
+    }
 }

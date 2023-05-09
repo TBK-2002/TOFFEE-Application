@@ -1,7 +1,7 @@
-package Authentication;
+package ModelsClasses;
 
-import Buying.Order;
-import Buying.Cart;
+import ModelsClasses.Buying.Cart;
+import ModelsClasses.Buying.Order;
 
 public class Account {
     private int id;
