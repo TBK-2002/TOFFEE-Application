@@ -1,0 +1,32 @@
+{
+    "1" : {
+    "id": 1, 
+    "email": "yehiaahmed900@gmail.com",
+    "password": "123456",
+    "orderHistory":[
+
+    ],
+    "cartProducts":[
+
+    ]
+    ,
+    
+    "loyaltyPoints" : 0,
+    "address": "Cairo"
+    },
+    "2" : {
+        "id": 2,
+        "email": "mohannadhisham@gmail.com",
+        "password": "123456",
+        "orderHistory":[
+    
+        ],
+        "cartProducts":[
+    
+        ]
+        ,
+        "loyaltyPoints" : 0,
+        "address": "Cairo"
+
+    }
+}

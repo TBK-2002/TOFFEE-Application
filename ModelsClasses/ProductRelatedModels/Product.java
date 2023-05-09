@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ModelsClasses.BuyingModels.Order;
 
 public class Product {
+    private int id;
     private Double price;
     private int quantity;
     private String name;
@@ -16,7 +17,9 @@ public class Product {
     private Type type;
     private ArrayList<Order> sales;
 
-    public Product(Double price, int quantity, String name, category category, String description, String brand, double discountPercentage, Type type, ArrayList<Order> sales) {
+    public Product(int id,Double price, int quantity, String name, category category, String description, String brand,
+            double discountPercentage, Type type, ArrayList<Order> sales) {
+         this.id = id;   
         this.price = price;
         this.quantity = quantity;
         this.name = name;
@@ -29,41 +32,72 @@ public class Product {
         this.sales = sales;
     }
 
-    public Double getPrice() {return price;}
+    public Double getPrice() {
+        return price;
+    }
 
-    public int getQuantity() {return quantity;}
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public void setQuantity(int quantity) {this.quantity = quantity;}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-    public void setName(String name) {this.name = name;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setPrice(Double price) {
         this.price = price;
     }
 
-    public void setCategory(category category) {this.category = category;}
+    public void setCategory(category category) {
+        this.category = category;
+    }
 
-    public void setDescription(String description) {this.description = description;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setBrand(String brand) {this.brand = brand;}
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-    public void setDiscountPercentage(double discountPercentage) {this.discountPercentage = discountPercentage;}
+    public void setDiscountPercentage(double discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
-    public category getCategory() {return category;}
+    public category getCategory() {
+        return category;
+    }
 
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
 
     // public Image getImage() {return image;}
 
-    public String getBrand() {return brand;}
+    public String getBrand() {
+        return brand;
+    }
 
-    public double getDiscountPercentage() {return discountPercentage;}
+    public double getDiscountPercentage() {
+        return discountPercentage;
+    }
 
-    public Type getType() {return type;}
+    public Type getType() {
+        return type;
+    }
 
-    public ArrayList<Order> getSales() {return sales;}
-
-
+    public ArrayList<Order> getSales() {
+        return sales;
+    }
+    public int getId() {
+        return id;
+    };
 }

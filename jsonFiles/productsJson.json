@@ -1,5 +1,6 @@
 [
     {
+        "id": "1",
         "price" : "5.55",
         "quantity" : "0",
         "name" : "kitkat chocolate",
@@ -13,6 +14,7 @@
         }
     },
     {
+        "id": "2",
         "price" : "5.55",
         "quantity" : "0",
         "name" : "5",
@@ -26,6 +28,7 @@
         }
     },
     {
+        "id": "3",
         "price" : "5.55",
         "quantity" : "0",
         "name" : "5",
