@@ -2,7 +2,7 @@ package ModelsClasses.ProductRelatedModels;
 
 import java.util.ArrayList;
 
-import ModelsClasses.Buying.Order;
+import ModelsClasses.BuyingModels.Order;
 
 public class Product {
     private Double price;

@@ -1,14 +1,16 @@
 package ModelsClasses;
 
-import ModelsClasses.Buying.Cart;
-import ModelsClasses.Buying.Order;
+import java.util.ArrayList;
+
+import ModelsClasses.BuyingModels.Order;
+import ModelsClasses.ProductRelatedModels.Product;
 
 public class Account {
     private int id;
     private String email;
     private String password;
     private Order[] orderHistory;
-    private Cart cart;
+    private ArrayList<Product> cartProducts;
     private int loyaltyPoints;
     private String address;
     public Account(){};
@@ -17,7 +19,7 @@ public class Account {
         this.email = email;
         this.password = password;
         this.orderHistory = new Order[0];
-        this.cart = new Cart();
+        this.cartProducts = new ArrayList<>();
         this.loyaltyPoints = 0;
         this.address = address;
     }
@@ -33,8 +35,8 @@ public class Account {
     public Order[] getOrderHistory() {
         return this.orderHistory;
     }
-    public Cart getCart() {
-        return this.cart;
+    public ArrayList<Product> getCartProducts() {
+        return this.cartProducts;
     }
     public int getLoyaltyPoints() {
         return this.loyaltyPoints;

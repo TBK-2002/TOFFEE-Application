@@ -1,0 +1,41 @@
+[
+    {
+        "price" : "5.55",
+        "quantity" : "0",
+        "name" : "kitkat chocolate",
+        "category" : "0",
+        "description" : "Tasty Pasty Choclate twisty",
+        "brand" : "kitkat",
+        "discountPercentage" : "0.5",
+        "type" : "1",
+        "sales" : {
+
+        }
+    },
+    {
+        "price" : "5.55",
+        "quantity" : "0",
+        "name" : "5",
+        "category" : "0",
+        "description" : "Tasty Pasty Choclate twisty",
+        "brand" : "kitkat",
+        "discountPercentage" : "0.5",
+        "type" : "1",
+        "sales" : {
+
+        }
+    },
+    {
+        "price" : "5.55",
+        "quantity" : "0",
+        "name" : "5",
+        "category" : "0",
+        "description" : "Tasty Pasty Choclate twisty",
+        "brand" : "kitkat",
+        "discountPercentage" : "0.5",
+        "type" : "1",
+        "sales" : {
+
+        }
+    }
+]

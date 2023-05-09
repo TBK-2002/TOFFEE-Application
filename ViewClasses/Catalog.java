@@ -1,13 +1,20 @@
 package ViewClasses;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import ModelsClasses.Account;
 import ModelsClasses.ProductRelatedModels.Product;
 
 public class Catalog {
     private ArrayList<Product> products;
+    private Account acc;
     public Catalog(ArrayList<Product> products) {
         this.products = products;
+        acc = null;
+    }
+    public void setAccount(Account acc) {
+        this.acc = acc;
     }
     public ArrayList<Product> filter(String name, String brand, Double price) {
         ArrayList<Product> filteredProducts = new ArrayList<Product>();
@@ -63,6 +70,22 @@ public class Catalog {
             System.out.println(this.products.get(i).getPrice() + "$"  + " Discount: " + this.products.get(i).getDiscountPercentage());
             // System.out.println(this.products.get(i).getDiscountPercentage());
             System.out.println("--------------------");
+        }
+        if(acc == null){
+            System.out.println("Options: ");
+            System.out.println("1. login");
+            System.out.println("2. register");
+        }
+        else{
+            System.out.println("You are logged in from: " + acc.getEmail());
+            System.out.println("Options: ");
+            System.out.println("1. Add item to cart");
+            System.out.println("2. log out");
+            Scanner sc = new Scanner(System.in);
+            int option = sc.nextInt();
+            if(option == 1){
+                
+            }
         }
     }
     public String addItem(Product product) {
