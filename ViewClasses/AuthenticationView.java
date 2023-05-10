@@ -1,6 +1,8 @@
 package ViewClasses;
 
 import Controller.*;
+import ModelsClasses.Account;
+
 import java.util.Scanner;
 
 public class AuthenticationView {
@@ -13,7 +15,9 @@ public class AuthenticationView {
         this.authController = authController;
     }
 
-    public void setDataforLogin(String email, String password) {
+    public String setDataforLogin() {
+        String password = "";
+        String email = "";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome back!");
         System.out.println("Please enter email:");
@@ -28,9 +32,10 @@ public class AuthenticationView {
             System.out.println("Invalid password. Please enter password again:");
             password = scanner.nextLine();
         }
+        return email;
     }
 
-    public void setDataforRegister(String email, String password, String address) {
+    public Account setDataforRegister(String email, String password, String address) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome!");
         System.out.println("Please enter email:");
@@ -39,6 +44,8 @@ public class AuthenticationView {
         password = scanner.nextLine();
         System.out.println("Enter address: ");
         address = scanner.nextLine();
+        Account acc = new Account(email, password, address);
+        return acc;
     }
 
 }

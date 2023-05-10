@@ -1,6 +1,5 @@
 {
-    "1" : {
-    "id": 1, 
+    "yehiaahmed900@gmail.com" : {
     "email": "yehiaahmed900@gmail.com",
     "password": "123456",
     "orderHistory":[
@@ -14,8 +13,7 @@
     "loyaltyPoints" : 0,
     "address": "Cairo"
     },
-    "2" : {
-        "id": 2,
+    "mohannadhisham@gmail.com" : {
         "email": "mohannadhisham@gmail.com",
         "password": "123456",
         "orderHistory":[

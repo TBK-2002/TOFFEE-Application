@@ -25,8 +25,6 @@ public class Account {
         this.address = address;
     }
 
-
-
     public String getEmail() {
         return this.email;
     }

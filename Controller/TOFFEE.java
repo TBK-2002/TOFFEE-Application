@@ -28,6 +28,10 @@ public class TOFFEE {
         this.authentication = new Authentication(this);
     }
 
+    public void otp() {
+        authentication.sendOTP(null);
+    }
+
     public void setAccount(Account account) {
         this.account = account;
         catalog.setAccount(account);
