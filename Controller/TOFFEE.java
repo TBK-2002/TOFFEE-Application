@@ -57,7 +57,6 @@ public class TOFFEE {
             while (scanner.hasNextLine()) {
                 stringBuilder.append(scanner.nextLine());
             }
-
             // Convert the StringBuilder object to a String object.
             String json = stringBuilder.toString();
 

@@ -13,6 +13,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.FileWriter;
 
 public class Authentication {
     private HashMap<String, Account> accounts;
@@ -135,7 +136,7 @@ public class Authentication {
         return false;
     }
 
-    public void toJSON(Account acc) {
+    public void toJSON() {
         File file = new File("jsonFiles/accounts.json");
         try {
             JSONObject jsonObject = new JSONObject();
@@ -147,10 +148,11 @@ public class Authentication {
                 accountObject.put("address", account.getAddress());
                 accountObject.put("loyaltyPoints", account.getLoyaltyPoints());
                 jsonObject.put(key, accountObject);
-
             }
-
-            System.out.println(jsonObject.toString());
+            // write json object to file
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(jsonObject.toString());
+            fileWriter.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -163,8 +165,8 @@ public class Authentication {
         Account account = null;
         account = authenticationView.setDataforRegister(email, password, address);
         if (accounts.get(account.getEmail()) == null && verifyOTP(account.getEmail())) {
-            toJSON(account);
             this.accounts.put(email, account);
+            toJSON();
             toffee.setAccount(account);
             return true;
         } else if(accounts.get(account.getEmail()) != null) {
