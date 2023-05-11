@@ -63,13 +63,13 @@ public class Authentication {
         }
     }
 
-    public void sendOTP(String email) {
-        String to = "nour.sehs.3@gmail.com";
+    public String sendOTP(String email) {
+        String to = email;
         String from = "toffeeappotp@gmail.com";
         String password = "dmqyfszeyqedwzgl";
         // Set properties for the email server
         Properties props = new Properties();
-        // props.put("mail.debug", "true");
+        //props.put("mail.debug", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.host", "smtp.gmail.com"); // use your email server's SMTP host
         props.put("mail.smtp.port", "587"); // use your email server's SMTP port
@@ -80,11 +80,11 @@ public class Authentication {
                 return new PasswordAuthentication(from, password);
             }
         });
+        String otp = "";
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            String otp = "";
             for (int i = 0; i < 6; i++) {
                 otp += (int) (Math.random() * 10);
             }
@@ -94,10 +94,13 @@ public class Authentication {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return otp;
     }
 
-    public Boolean verifyOTP(String email, String otp) {
-        if (otp.equals("123456")) {
+    public Boolean verifyOTP(String email) {
+        String otp1 = sendOTP(email);
+        String otp = authenticationView.set_otp("");
+        if (otp.equals(otp1)) {
             return true;
         }
         return false;
@@ -132,7 +135,7 @@ public class Authentication {
         return false;
     }
 
-    public void toJSON() {
+    public void toJSON(Account acc) {
         File file = new File("jsonFiles/accounts.json");
         try {
             JSONObject jsonObject = new JSONObject();
@@ -159,13 +162,17 @@ public class Authentication {
         String address = "";
         Account account = null;
         account = authenticationView.setDataforRegister(email, password, address);
-        if (accounts.get(account.getEmail()) == null) {
+        if (accounts.get(account.getEmail()) == null && verifyOTP(account.getEmail())) {
+            toJSON(account);
             this.accounts.put(email, account);
-            toJSON();
             toffee.setAccount(account);
             return true;
-        } else {
+        } else if(accounts.get(account.getEmail()) != null) {
             System.out.println("Account already exists");
+            return false;
+        }
+        else{
+            System.out.println("Invalid OTP");
             return false;
         }
 

@@ -48,4 +48,12 @@ public class AuthenticationView {
         return acc;
     }
 
+    public String set_otp(String OTP){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter OTP: ");
+        String otp = scanner.nextLine();
+        OTP = otp;
+        return OTP;
+    }
+
 }
