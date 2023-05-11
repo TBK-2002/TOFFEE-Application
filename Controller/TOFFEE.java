@@ -18,6 +18,7 @@ public class TOFFEE {
     private ArrayList<Product> products;
     private Catalog catalog;
     private Authentication authentication;
+    private BuyingController buyingController;
 
     public TOFFEE() {
         this.account = null;
@@ -30,6 +31,7 @@ public class TOFFEE {
     public void setAccount(Account account) {
         this.account = account;
         catalog.setAccount(account);
+        buyingController = new BuyingController(account, this);
     }
 
     public void login() {
@@ -44,6 +46,19 @@ public class TOFFEE {
 
     public void viewCatalog() {
         catalog.viewCatalog();
+    }
+
+    public void viewCart() {
+        buyingController.viewCart();
+    }
+
+    public void addToCart(Product product) {
+        buyingController.addToCart(product);
+        authentication.toJSON();
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public void loadProducts() {
@@ -80,5 +95,9 @@ public class TOFFEE {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void toJSON() {
+        authentication.toJSON();
     }
 }

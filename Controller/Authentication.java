@@ -2,11 +2,22 @@ package Controller;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.github.lbovolini.mapper.ObjectMapper;
+
 import ModelsClasses.Account;
+import ModelsClasses.BuyingModels.Order;
+import ModelsClasses.PaymentPack.Payment;
+import ModelsClasses.PaymentPack.cashOnDelivery;
+import ModelsClasses.ProductRelatedModels.Product;
+import ModelsClasses.ProductRelatedModels.Type;
+import ModelsClasses.ProductRelatedModels.category;
 import ViewClasses.AuthenticationView;
 import java.util.Properties;
 import javax.mail.*;
@@ -14,6 +25,13 @@ import javax.mail.internet.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import java.io.File;
 
 public class Authentication {
     private HashMap<String, Account> accounts;
@@ -55,7 +73,53 @@ public class Authentication {
                     String password = accObject.getString("password");
                     String address = accObject.getString("address");
                     double loyaltyPoints = accObject.getDouble("loyaltyPoints");
-                    Account account = new Account(email, password, address);
+                    ArrayList<Product> cart = new ArrayList<Product>();
+                    Payment payment = new cashOnDelivery();
+                    JSONArray jsonCart = accObject.getJSONArray("cart");
+                    for (int i = 0; i < jsonCart.length(); i++) {
+                        JSONObject productJson = jsonCart.getJSONObject(i);
+                        int id = productJson.getInt("id");
+                        double price = productJson.getDouble("price");
+                        int quantity = productJson.getInt("quantity");
+                        String name = productJson.getString("name");
+                        int cat = productJson.getInt("category");
+                        String description = productJson.getString("description");
+                        String brand = productJson.getString("brand");
+                        double discountPercentage = productJson.getDouble("discountPercentage");
+                        int tp = productJson.getInt("type");
+                        ArrayList<Order> sales = new ArrayList<Order>();
+                        Product product = new Product(id, price, quantity, name, category.values()[cat], description,
+                                brand,
+                                discountPercentage, Type.values()[tp], sales);
+                        cart.add(product);
+                    }
+                    JSONArray jsonOrderHistory = accObject.getJSONArray("orderHistory");
+                    ArrayList<Order> orderHistory = new ArrayList<Order>();
+                    for (int i = 0; i < jsonOrderHistory.length(); i++) {
+                        JSONObject orderJson = jsonOrderHistory.getJSONObject(i);
+                        String address1 = orderJson.getString("address");
+                        JSONArray jsonOrderItems = orderJson.getJSONArray("orderItems");
+                        ArrayList<Product> orderItems = new ArrayList<Product>();
+                        for (int j = 0; j < jsonOrderItems.length(); j++) {
+                            JSONObject productJson = jsonOrderItems.getJSONObject(j);
+                            int id1 = productJson.getInt("id");
+                            double price = productJson.getDouble("price");
+                            int quantity = productJson.getInt("quantity");
+                            String name = productJson.getString("name");
+                            int cat = productJson.getInt("category");
+                            String description = productJson.getString("description");
+                            String brand = productJson.getString("brand");
+                            double discountPercentage = productJson.getDouble("discountPercentage");
+                            int tp = productJson.getInt("type");
+                            ArrayList<Order> sales = new ArrayList<Order>();
+                            Product product = new Product(id1, price, quantity, name, category.values()[cat],
+                                    description, brand, discountPercentage, Type.values()[tp], sales);
+                            orderItems.add(product);
+                        }
+                        Order order = new Order(address1, payment, orderItems);
+                        orderHistory.add(order);
+                    }
+                    Account account = new Account(email, password, address, cart, orderHistory);
                     this.accounts.put(email, account);
                 }
             }
@@ -70,7 +134,7 @@ public class Authentication {
         String password = "dmqyfszeyqedwzgl";
         // Set properties for the email server
         Properties props = new Properties();
-        //props.put("mail.debug", "true");
+        // props.put("mail.debug", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.host", "smtp.gmail.com"); // use your email server's SMTP host
         props.put("mail.smtp.port", "587"); // use your email server's SMTP port
@@ -137,8 +201,8 @@ public class Authentication {
     }
 
     public void toJSON() {
-        File file = new File("jsonFiles/accounts.json");
         try {
+            File file = new File("jsonFiles/accounts.json");
             JSONObject jsonObject = new JSONObject();
             for (String key : this.accounts.keySet()) {
                 Account account = this.accounts.get(key);
@@ -147,11 +211,49 @@ public class Authentication {
                 accountObject.put("password", account.getPassword());
                 accountObject.put("address", account.getAddress());
                 accountObject.put("loyaltyPoints", account.getLoyaltyPoints());
-                jsonObject.put(key, accountObject);
+                JSONArray cart = new JSONArray();
+                for (Product product : account.getCartProducts()) {
+                    JSONObject productObject = new JSONObject();
+                    productObject.put("id", product.getId());
+                    productObject.put("name", product.getName());
+                    productObject.put("price", product.getPrice());
+                    productObject.put("quantity", product.getQuantity());
+                    productObject.put("category", product.getCategory().ordinal());
+                    productObject.put("description", product.getDescription());
+                    productObject.put("brand", product.getBrand());
+                    productObject.put("discountPercentage", product.getDiscountPercentage());
+                    productObject.put("type", product.getType().ordinal());
+                    cart.put(productObject);
+                }
+                JSONArray orderHistory = new JSONArray();
+                for (Order order : account.getOrderHistory()) {
+                    JSONObject orderObject = new JSONObject();
+                    JSONArray products = new JSONArray();
+                    for (Product product : order.getOrderItems()) {
+                        JSONObject productObject = new JSONObject();
+                        productObject.put("id", product.getId());
+                        productObject.put("name", product.getName());
+                        productObject.put("price", product.getPrice());
+                        productObject.put("quantity", product.getQuantity());
+                        productObject.put("category", product.getCategory().ordinal());
+                        productObject.put("description", product.getDescription());
+                        productObject.put("brand", product.getBrand());
+                        productObject.put("discountPercentage", product.getDiscountPercentage());
+                        productObject.put("type", product.getType().ordinal());
+                        products.put(productObject);
+                    }
+                    orderObject.put("orderItems", products);
+                    orderObject.put("address", order.getAddress());
+                    orderHistory.put(orderObject);
+                }
+                accountObject.put("orderHistory", orderHistory);
+                accountObject.put("cart", cart);
+                jsonObject.put(account.getEmail(), accountObject);
             }
             // write json object to file
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(jsonObject.toString());
+            String json = jsonObject.toString();
+            fileWriter.write(json);
             fileWriter.close();
         } catch (Exception e) {
             System.out.println(e);
@@ -164,16 +266,17 @@ public class Authentication {
         String address = "";
         Account account = null;
         account = authenticationView.setDataforRegister(email, password, address);
+        System.out.println("");
+        System.out.println("Sending otp This Might take a While...");
         if (accounts.get(account.getEmail()) == null && verifyOTP(account.getEmail())) {
             this.accounts.put(email, account);
             toJSON();
             toffee.setAccount(account);
             return true;
-        } else if(accounts.get(account.getEmail()) != null) {
+        } else if (accounts.get(account.getEmail()) != null) {
             System.out.println("Account already exists");
             return false;
-        }
-        else{
+        } else {
             System.out.println("Invalid OTP");
             return false;
         }

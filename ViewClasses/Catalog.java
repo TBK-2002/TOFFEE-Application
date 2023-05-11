@@ -9,7 +9,6 @@ import Controller.*;
 public class Catalog {
     private ArrayList<Product> products;
     private Account acc;
-    private BuyingController buyingController;
     private Scanner scanner;
     private TOFFEE toffee;
 
@@ -22,7 +21,6 @@ public class Catalog {
 
     public void setAccount(Account acc) {
         this.acc = acc;
-        buyingController = new BuyingController(acc);
     }
 
     public ArrayList<Product> filter(String name, String brand, Double price) {
@@ -76,6 +74,7 @@ public class Catalog {
     }
 
     public void viewCatalog() {
+        System.out.print("\033\143");
         for (int i = 0; i < this.products.size(); i++) {
             System.out.println("--------------------");
             System.out.println("ID: " + this.products.get(i).getId() + " Type: " + this.products.get(i).getType());
@@ -111,10 +110,11 @@ public class Catalog {
             if (option == 1) {
                 addToCartOption();
             } else if (option == 2) {
-                buyingController.viewCart();
+                toffee.viewCart();
             } else if (option == 3) {
                 acc = null;
                 toffee.setAccount(null);
+                this.viewCatalog();
             }
         }
     }
@@ -140,11 +140,14 @@ public class Catalog {
                 System.out.print("Enter product quantity: ");
                 quantity = scanner.nextInt();
             }
-            Product temp = new Product(prdct.getId(), prdct.getPrice(), prdct.getQuantity(), prdct.getName(),
+            prdct.setQuantity(prdct.getQuantity()-quantity);
+            Product temp = new Product(prdct.getId(), prdct.getPrice(), quantity, prdct.getName(),
                     prdct.getCategory(), prdct.getDescription(), prdct.getBrand(), prdct.getDiscountPercentage(),
                     prdct.getType(), prdct.getSales());
-            prdct = temp;
-            System.out.println(prdct.getName() + " is added to cart");
+            
+            System.out.println(temp.getName() + " is added to cart");
+            toffee.addToCart(temp);
+            this.viewCatalog();
         }
     }
 

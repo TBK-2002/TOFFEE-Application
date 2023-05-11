@@ -2,7 +2,7 @@
     {
         "id": "1",
         "price" : "5.55",
-        "quantity" : "0",
+        "quantity" : "5",
         "name" : "kitkat chocolate",
         "category" : "0",
         "description" : "Tasty Pasty Choclate twisty",
@@ -16,11 +16,11 @@
     {
         "id": "2",
         "price" : "5.55",
-        "quantity" : "0",
-        "name" : "5",
+        "quantity" : "5",
+        "name" : "cadbury chocolate",
         "category" : "0",
         "description" : "Tasty Pasty Choclate twisty",
-        "brand" : "kitkat",
+        "brand" : "cadbury",
         "discountPercentage" : "0.5",
         "type" : "1",
         "sales" : {
@@ -30,11 +30,11 @@
     {
         "id": "3",
         "price" : "5.55",
-        "quantity" : "0",
-        "name" : "5",
+        "quantity" : "5",
+        "name" : "snickers chocolate",
         "category" : "0",
         "description" : "Tasty Pasty Choclate twisty",
-        "brand" : "kitkat",
+        "brand" : "snickers",
         "discountPercentage" : "0.5",
         "type" : "1",
         "sales" : {

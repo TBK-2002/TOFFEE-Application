@@ -9,10 +9,12 @@ import ViewClasses.CartView;
 public class BuyingController {
     private Account account;
     private CartView cartView;
+    private TOFFEE toffee;
 
-    public BuyingController(Account account) {
+    public BuyingController(Account account, TOFFEE toffee) {
         this.account = account;
-        this.cartView = new CartView(account);
+        this.cartView = new CartView(account, this);
+        this.toffee = toffee;
     };
 
     public void viewCart() {
@@ -23,8 +25,21 @@ public class BuyingController {
         account.addToCart(product);
     }
 
-    public  void updateView(){
+    public void updateView() {
         cartView.viewCart();
     }
 
+    public void viewCatalog() {
+        toffee.viewCatalog();
+    }
+
+    public void checkout() {
+        cartView.checkout();
+        account.clearCart();
+        toffee.toJSON();
+        toffee.viewCatalog();
+    }
+    public void viewOrderHistory() {
+        cartView.view_order_history();
+    }
 }
