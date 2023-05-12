@@ -1,6 +1,9 @@
+/**
+ * Enum Type
+ */
 package ModelsClasses.ProductRelatedModels;
 
 public enum Type {
-    loose,
-    sealed
+    Loose
+    ,Sealed
 }

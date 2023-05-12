@@ -1,5 +1,9 @@
+/**
+ * @file Authentication.java
+ * @brief This file contains the Authentication Controller Class Implementation.
+ * @details This file contains all the functions required for the Authentication Controller
+ */
 package Controller;
-
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -9,7 +13,7 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.github.lbovolini.mapper.ObjectMapper;
+//import com.github.lbovolini.mapper.ObjectMapper;
 
 import ModelsClasses.Account;
 import ModelsClasses.BuyingModels.Order;
@@ -34,12 +38,24 @@ import java.util.logging.Logger;
 import java.io.File;
 
 public class Authentication {
+    /**
+     * map of accounts
+     */
     private HashMap<String, Account> accounts;
+    /**
+     * authenticationView: The authentication view.
+     */
 
     private AuthenticationView authenticationView;
-
+    /**
+     * toffee: The toffee controller.
+     */
     private TOFFEE toffee;
 
+    /**
+     * Constructor for Authentication class.
+     * @param toffee The toffee controller.
+     */
     public Authentication(TOFFEE toffee) {
         this.accounts = new HashMap<String, Account>();
         this.authenticationView = new AuthenticationView(this);
@@ -47,6 +63,9 @@ public class Authentication {
         loadmap();
     }
 
+    /**
+     * loadmap: loads the map of accounts from the json file.
+     */
     public void loadmap() {
         try {
             Scanner scanner = new Scanner(new FileReader("jsonFiles/accounts.json"));
@@ -128,6 +147,12 @@ public class Authentication {
         }
     }
 
+    /**
+     * sendOTP: sends an OTP to the user's email.
+     * @param email
+     * @return OTP
+     */
+
     public String sendOTP(String email) {
         String to = email;
         String from = "toffeeappotp@gmail.com";
@@ -162,6 +187,12 @@ public class Authentication {
         return otp;
     }
 
+    /**
+     * verifyOTP: verifies the OTP entered by the user.
+     * @param email
+     * @return true if the OTP is correct, false otherwise.
+     */
+
     public Boolean verifyOTP(String email) {
         String otp1 = sendOTP(email);
         String otp = authenticationView.set_otp("");
@@ -171,6 +202,12 @@ public class Authentication {
         return false;
     }
 
+    /**
+     * checkAccount: checks if the account exists.
+     * @param email
+     * @return true if the account exists, false otherwise.
+     */
+
     public Boolean checkAccount(String email) {
         Account account = this.accounts.get(email);
         if (account != null) {
@@ -179,6 +216,10 @@ public class Authentication {
         return false;
     }
 
+    /**
+     * login: logs in the user.
+     */
+
     public void login() {
         String email = "";
         email = authenticationView.setDataforLogin();
@@ -186,12 +227,23 @@ public class Authentication {
         toffee.setAccount(account);
     }
 
+    /**
+     * validateEmail: validates the email entered by the user.
+     * @param email
+     * @return true if the email is valid, false otherwise.
+     */
     public boolean validateEmail(String email) {
         if (email.contains("@") && email.contains(".") && this.accounts.get(email) != null) {
             return true;
         }
         return false;
     }
+    /**
+     * validatePassword: validates the password entered by the user.
+     * @param password
+     * @param email
+     * @return true if the password is valid, false otherwise.
+     */
 
     public boolean validatePassword(String password, String email) {
         if (password.length() >= 4 && this.accounts.get(email).getPassword().equals(password)) {
@@ -199,6 +251,10 @@ public class Authentication {
         }
         return false;
     }
+
+    /**
+     * toJson : stores accounts objects in json file.
+     */
 
     public void toJSON() {
         try {
@@ -259,6 +315,11 @@ public class Authentication {
             System.out.println(e);
         }
     }
+
+    /**
+     * signUp: registers the user.
+     * @return true if the user is registered, false otherwise.
+     */
 
     public Boolean signUp() {
         String email = "";

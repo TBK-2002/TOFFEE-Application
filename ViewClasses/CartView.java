@@ -1,5 +1,7 @@
+/**
+ * Class to display cart and order history
+ */
 package ViewClasses;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import Controller.BuyingController;
@@ -11,9 +13,24 @@ import ModelsClasses.PaymentPack.cashOnDelivery;
 import ModelsClasses.ProductRelatedModels.Product;
 
 public class CartView {
+    /**
+     * account: Account object
+     */
     private Account account;
+    /**
+     * scanner: Scanner object
+     */
     private Scanner scanner;
+    /**
+     * buyingController: BuyingController object
+     */
     private BuyingController buyingController;
+
+    /**
+     * Constructor for CartView
+     * @param account
+     * @param buyingController
+     */
 
     public CartView(Account account, BuyingController buyingController) {
         scanner = new Scanner(System.in);
@@ -21,9 +38,18 @@ public class CartView {
         this.buyingController = buyingController;
     };
 
+    /**
+     * Setter for account
+     * @param account
+     */
+
     public void setAccount(Account account) {
         this.account = account;
     };
+
+    /**
+     * viewCart: Displays cart and options
+     */
 
     public void viewCart() {
         System.out.print("\033\143");
@@ -58,6 +84,10 @@ public class CartView {
             buyingController.viewOrderHistory();
         }
     }
+
+    /**
+     * checkout: Displays options for checkout and then places order
+     */
 
     public void checkout() {
         System.out.print("\033\143");
@@ -96,6 +126,10 @@ public class CartView {
         account.getOrderHistory().add(order);
         System.out.println("Order placed");
     }
+
+    /**
+     * view_order_history: Displays order history
+     */
 
     public void view_order_history() {
         System.out.print("\033\143");

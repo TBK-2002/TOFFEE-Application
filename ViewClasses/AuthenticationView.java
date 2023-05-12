@@ -1,19 +1,39 @@
+/**
+ * Class for AuthenticationView
+ */
 package ViewClasses;
-
 import Controller.*;
 import ModelsClasses.Account;
 
 import java.util.Scanner;
 
 public class AuthenticationView {
+    /**
+     * email: The email of the account.
+     */
     private String email;
+    /**
+     * password: The password of the account.
+     */
     private String password;
 
+    /**
+     * Authentication controller.
+     */
     private Authentication authController;
+    /**
+     * Constructor for AuthenticationView class.
+     * @param authController
+     */
 
     public AuthenticationView(Authentication authController) {
         this.authController = authController;
     }
+
+    /**
+     * Sett data for login function in Authentication controller.
+     * @return email
+     */
 
     public String setDataforLogin() {
         String password = "";
@@ -35,6 +55,14 @@ public class AuthenticationView {
         return email;
     }
 
+    /**
+     * Set data for register function in Authentication controller.
+     * @param email
+     * @param password
+     * @param address
+     * @return acc (Account)
+     */
+
     public Account setDataforRegister(String email, String password, String address) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome!");
@@ -47,6 +75,12 @@ public class AuthenticationView {
         Account acc = new Account(email, password, address);
         return acc;
     }
+
+    /**
+     * send OTP to email.
+     * @param OTP
+     * @return OTP (String)
+     */
 
     public String set_otp(String OTP){
         Scanner scanner = new Scanner(System.in);

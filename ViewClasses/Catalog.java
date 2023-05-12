@@ -1,5 +1,7 @@
+/**
+ * Catalog: This class is responsible for the catalog.
+ */
 package ViewClasses;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import ModelsClasses.Account;
@@ -7,10 +9,27 @@ import ModelsClasses.ProductRelatedModels.Product;
 import Controller.*;
 
 public class Catalog {
+    /**
+     * products: The list of products in the system.
+     */
     private ArrayList<Product> products;
+    /**
+     * acc: The account that is currently logged in.
+     */
     private Account acc;
+    /**
+     * scanner: The scanner used to read input from the user.
+     */
     private Scanner scanner;
+    /**
+     * toffee: The TOFFEE Controller .
+     */
     private TOFFEE toffee;
+    /**
+     * Constructor for Catalog class.
+     * @param products
+     * @param toffee
+     */
 
     public Catalog(ArrayList<Product> products, TOFFEE toffee) {
         this.products = products;
@@ -18,10 +37,22 @@ public class Catalog {
         this.toffee = toffee;
         scanner = new Scanner(System.in);
     }
+    /**
+     * Setter for account.
+     * @param acc
+     */
 
     public void setAccount(Account acc) {
         this.acc = acc;
     }
+
+    /**
+     * filter: Filters the products based on the given parameters.
+     * @param name
+     * @param brand
+     * @param price
+     * @return ArrayList<Product>
+     */
 
     public ArrayList<Product> filter(String name, String brand, Double price) {
         ArrayList<Product> filteredProducts = new ArrayList<Product>();
@@ -34,6 +65,12 @@ public class Catalog {
         return filteredProducts;
     }
 
+    /**
+     * search: Searches for a product with the given name.
+     * @param name
+     * @return ArrayList<Product> The list of products with the given name.
+     */
+
     public ArrayList<Product> search(String name) {
         ArrayList<Product> filteredProducts = new ArrayList<Product>();
         for (int i = 0; i < this.products.size(); i++) {
@@ -43,6 +80,12 @@ public class Catalog {
         }
         return filteredProducts;
     }
+
+    /**
+     * cancelItem: Cancels the given product from the cart.
+     * @param product
+     * @return boolean True if the product was found and removed, false otherwise.
+     */
 
     public boolean cancelItem(Product product) {
         for (int i = 0; i < products.size(); i++) {
@@ -55,6 +98,17 @@ public class Catalog {
         System.out.println("Item not found");
         return false;
     }
+
+    /**
+     * updateItem: Updates the given product with the given parameters.
+     * @param product
+     * @param quantity
+     * @param name
+     * @param brand
+     * @param price
+     * @param description
+     * @return boolean True if the product was found and updated, false otherwise.
+     */
 
     public boolean updateItem(Product product, int quantity, String name, String brand, Double price,
             String description) {
@@ -72,6 +126,10 @@ public class Catalog {
         System.out.println("Item not found");
         return true;
     }
+
+    /**
+     * viewCatalog: Displays the catalog.
+     */
 
     public void viewCatalog() {
         System.out.print("\033\143");
@@ -118,6 +176,9 @@ public class Catalog {
             }
         }
     }
+    /**
+     * addToCartOption: Adds a product to the cart.
+     */
 
     public void addToCartOption() {
         Product prdct = null;
@@ -150,6 +211,12 @@ public class Catalog {
             this.viewCatalog();
         }
     }
+
+    /**
+     * addItem: Adds the given product to the cart.
+     * @param product
+     * @return String A message indicating whether the product was added or not.
+     */
 
     public String addItem(Product product) {
         for (int i = 0; i < this.products.size(); i++) {
