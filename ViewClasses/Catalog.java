@@ -132,7 +132,6 @@ public class Catalog {
      */
 
     public void viewCatalog() {
-        System.out.print("\033\143");
         for (int i = 0; i < this.products.size(); i++) {
             System.out.println("--------------------");
             System.out.println("ID: " + this.products.get(i).getId() + " Type: " + this.products.get(i).getType());
@@ -153,8 +152,10 @@ public class Catalog {
             System.out.print("Enter option: ");
             int option = scanner.nextInt();
             if (option == 1) {
+                System.out.print("\033\143");
                 toffee.login();
             } else if (option == 2) {
+                System.out.print("\033\143");
                 toffee.register();
             }
         } else {
@@ -166,10 +167,13 @@ public class Catalog {
             System.out.print("Enter option: ");
             int option = scanner.nextInt();
             if (option == 1) {
+                System.out.print("\033\143");
                 addToCartOption();
             } else if (option == 2) {
+                System.out.print("\033\143");
                 toffee.viewCart();
             } else if (option == 3) {
+                System.out.print("\033\143");
                 acc = null;
                 toffee.setAccount(null);
                 this.viewCatalog();

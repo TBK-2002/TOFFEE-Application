@@ -52,7 +52,6 @@ public class CartView {
      */
 
     public void viewCart() {
-        System.out.print("\033\143");
         System.out.println("Items in cart: ");
         double sum = 0;
         System.out.println("-----------");
@@ -73,14 +72,19 @@ public class CartView {
             option = scanner.nextInt();
         }
         if (option == 1) {
+            System.out.print("\033\143");
             buyingController.viewCatalog();
         } else if (option == 2) {
             if (account.getCartProducts().size() == 0) {
+                System.out.print("\033\143");
                 System.out.println("Cart is empty");
                 buyingController.viewCatalog();
-            } else
+            } else{
+                System.out.print("\033\143");
                 buyingController.checkout();
+            }
         } else {
+            System.out.print("\033\143");
             buyingController.viewOrderHistory();
         }
     }
@@ -90,7 +94,6 @@ public class CartView {
      */
 
     public void checkout() {
-        System.out.print("\033\143");
         System.out.println("Choose Address: ");
         System.out.println("1. Current Address: " + account.getAddress());
         System.out.println("2. New Address");
@@ -132,7 +135,6 @@ public class CartView {
      */
 
     public void view_order_history() {
-        System.out.print("\033\143");
         ArrayList<Order> orders = account.getOrderHistory();
         System.out.println("Order History: ");
         for (int i = 0; i < orders.size(); i++) {
@@ -156,8 +158,11 @@ public class CartView {
             option = scanner.nextInt();
         }
         if (option == 1) {
+            System.out.print("\033\143");
             buyingController.viewCatalog();
         } else if (option == 2) {
+            System.out.print("\033\143");
+
             buyingController.viewCart();
         }
     }
