@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "json-20230227.jar",
+        "javax.mail.jar",
+        "activation.jar",
+        "object-mapper-1.1.68.jar"
+    ]
+}
